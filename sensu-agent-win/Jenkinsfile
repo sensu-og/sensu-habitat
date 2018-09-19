@@ -1,0 +1,39 @@
+// Load in the shared platform jenkins DSL utilities
+@Library('platform') _
+def repo_version = '0.0.0'
+def version(file) {
+  def matcher = readFile(file) =~ '"(.+)"'
+  matcher ? matcher[0][1] : null
+}
+
+def origin="ncr_devops_platform"
+def package_name="sensu-agent-win"
+
+node('habitat-windows'){
+  withEnv(
+    [
+      "HAB_ORIGIN=$origin",
+      "HAB_BLDR_URL=https://bldr.habitat.sh"
+    ]
+  ){
+    checkout scm
+    notIfPullRequest{
+      stage('Build'){
+        try{
+          powershell "hab studio build -k $origin ."
+        }
+        finally {
+        }
+      }
+      stage('Deliver'){
+        withCredentials([string(credentialsId: 'CommsHabAuthToken', variable: 'HAB_AUTH_TOKEN')]) {
+          powershell """
+            \$hart = (Get-ChildItem ./results) | ?{ \$_.Name -like '$origin-$package_name*.hart'} | %{ \$_.FullName }
+            Write-Host "Uploading \$hart" 
+            hab pkg upload \$hart -z \$env:HAB_AUTH_TOKEN
+          """ 
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+#!/bin/sh
+exec 2>&1
+
+function swapClusterInfo() {
+  etcd_initial_cluster="etcd-initial-cluster: \""
+  {{#eachAlive svc.members as |member| ~}}
+    etcd_initial_cluster="${etcd_initial_cluster}{{member.sys.hostname}}={{member.sys.hostname}}:{{member.cfg.etcd_peer_port}}"
+    {{#unless @last ~}}etcd_initial_cluster="$etcd_initial_cluster,"{{/unless ~}} 
+  {{/eachAlive ~}}
+  sed -i '/etcd-initial-cluster:/c\'"${etcd_initial_cluster}\"" $1
+}
+
+# copy the generated config template to the operational config file
+cp -f {{pkg.svc_config_path}}/backend.template.yml {{pkg.svc_config_path}}/backend.yml
+
+# if we are in a leader/follower topology pass in info for other backend cluster nodes
+{{#if svc.me.leader ~}}
+  swapClusterInfo {{pkg.svc_config_path}}/backend.yml
+{{/if ~}}
+{{#if svc.me.follower ~}}
+  swapClusterInfo {{pkg.svc_config_path}}/backend.yml
+{{/if ~}}

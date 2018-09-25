@@ -36,6 +36,12 @@ dashboard-host = "[::]"
 dashboard-port = 3000
 
 ##
+# etcd cluster configuration
+##
+etcd_peer_port = 2380
+etcd_client_port = 2379
+
+##
 # other
 ##
 debug = false

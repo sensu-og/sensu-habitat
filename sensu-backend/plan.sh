@@ -11,6 +11,7 @@ pkg_deps=(core/curl)
 pkg_bin_dirs=(bin)
 pkg_exports=(
   [port]=agent-port
+  [etcd_peer_port]=etcd_peer_port
 )
 pkg_description="Sensu 2.0 Backend"
 pkg_upstream_url="https://sensu.io"

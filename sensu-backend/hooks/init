@@ -3,10 +3,12 @@ exec 2>&1
 
 function swapClusterInfo() {
   etcd_initial_cluster=""
-  {{#eachAlive svc.members as |member| ~}}
+  {{#eachAlive svc.members as |member|}}
     etcd_initial_cluster="${etcd_initial_cluster}{{member.sys.hostname}}={{member.sys.hostname}}:{{member.cfg.etcd_peer_port}}"
-    {{#unless @last ~}}etcd_initial_cluster="$etcd_initial_cluster,"{{/unless ~}} 
-  {{/eachAlive ~}}
+    {{#unless @last}}
+      etcd_initial_cluster="$etcd_initial_cluster,"
+    {{/unless}} 
+  {{/eachAlive}}
   etcd_initial_cluster="etcd-initial-cluster: \"$etcd_initial_cluster\""
   sed -i '/etcd-initial-cluster:/c\'"${etcd_initial_cluster}" $1
 }

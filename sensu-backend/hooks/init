@@ -9,8 +9,8 @@ function swapClusterInfo() {
       etcd_initial_cluster="$etcd_initial_cluster,"
     {{/unless}} 
   {{/eachAlive}}
-  etcd_initial_cluster="etcd-initial-cluster: \"$etcd_initial_cluster\""
-  sed -i '/etcd-initial-cluster:/c\'"${etcd_initial_cluster}" $1
+  etcd_initial_cluster="initial-cluster: \"$etcd_initial_cluster\""
+  sed -i '/initial-cluster:/c\'"${etcd_initial_cluster}" $1
 }
 
 # copy the generated config template to the operational config file

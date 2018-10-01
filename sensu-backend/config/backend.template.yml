@@ -45,9 +45,9 @@ log-level: "{{cfg.log-level}}"
 
 ##
 # etcd config
-etcd-listen-client-urls: http://0.0.0.0:{{cfg.etcd_client_port}}
-etcd-name: {{sys.ip}}
-etcd-initial-cluster: ""
-etcd-initial-cluster-state: new
-etcd-initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
-etcd-listen-peer-urls: http://0.0.0.0:{{cfg.etcd_peer_port}}
+listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
+name: {{sys.ip}}
+initial-cluster: ""
+initial-cluster-state: new
+initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+listen-peer-urls: http://{{sys.ip}}{{cfg.etcd_peer_port}}

@@ -50,4 +50,4 @@ name: {{sys.ip}}
 initial-cluster: ""
 initial-cluster-state: new
 initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
-listen-peer-urls: http://{{sys.ip}}{{cfg.etcd_peer_port}}
+listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}

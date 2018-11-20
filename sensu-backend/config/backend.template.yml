@@ -45,9 +45,19 @@ log-level: "{{cfg.log-level}}"
 
 ##
 # etcd config
+{{#if svc.me.leader ~}}
 listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
 name: {{sys.ip}}
 initial-cluster: ""
 initial-cluster-state: new
 initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
 listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+{{/if ~}}
+{{#if svc.me.follower ~}}
+listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
+name: {{sys.ip}}
+initial-cluster: ""
+initial-cluster-state: new
+initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+{{/if ~}}

@@ -1,5 +1,5 @@
 pkg_name=sensu-agent
-pkg_origin=core
+pkg_origin=sensu
 pkg_version="5.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")

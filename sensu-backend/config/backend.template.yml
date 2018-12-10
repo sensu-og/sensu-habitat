@@ -17,6 +17,12 @@ api-host: "{{cfg.api-host}}"
 api-port: {{cfg.api-port}}
 
 ##
+# api configuration
+##
+#api-listen-address: "[::]:8080" # listen on all IPv4 and IPv6 addresses
+#api-url: "http://localhost:8080"
+
+##
 # ssl configuration
 ##
 {{#if cfg.cert-file ~}}
@@ -42,22 +48,25 @@ dashboard-port: {{cfg.dashboard-port}}
 debug: {{cfg.debug}}
 deregistration-handler: "{{cfg.deregistration-handler}}"
 log-level: "{{cfg.log-level}}"
+cache-dir: "{{pkg.svc_var_path}}/cache"
 
 ##
 # etcd config
 {{#if svc.me.leader ~}}
-listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
-name: {{sys.ip}}
-initial-cluster: ""
-initial-cluster-state: new
-initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
-listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+etcd-listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
+etcd-listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+etcd-advertise-client-urls: "http://localhost:2379"
+etcd-initial-cluster: ""
+etcd-initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+etcd-initial-cluster-state: new
+etcd-name: {{sys.ip}}
 {{/if ~}}
 {{#if svc.me.follower ~}}
-listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
-name: {{sys.ip}}
-initial-cluster: ""
-initial-cluster-state: new
-initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
-listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+etcd-listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
+etcd-listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+etcd-advertise-client-urls: "http://localhost:2379"
+etcd-initial-cluster: ""
+etcd-initial-advertise-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}
+etcd-initial-cluster-state: new
+etcd-name: {{sys.ip}}
 {{/if ~}}

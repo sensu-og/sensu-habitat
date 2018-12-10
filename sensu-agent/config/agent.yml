@@ -1,10 +1,10 @@
+
 ---
-#
-# authentication configuration
-#
-id: "{{cfg.id}}"
-organization: "{{cfg.organization}}"
-environment: "{{cfg.environment}}"
+##
+# agent configuration
+##
+name: "{{cfg.name}}"
+namespace: "{{cfg.namespace}}"
 subscriptions: "{{cfg.subscriptions}}"
 {{#if bind.backend}}
 backend-url:
@@ -18,12 +18,15 @@ backend-url:
 {{~/each}}
 {{/if}}
 
+##
+# authentication configuration
+##
 user: "{{cfg.user}}"
 password: "{{cfg.password}}"
 
-#
+##
 # api configuration
-#
+##
 api-host: "{{cfg.api-host}}"
 api-port: {{cfg.api-port}}
 disable-api: {{cfg.disable-api}}
@@ -52,6 +55,6 @@ deregister: "{{cfg.deregister}}"
 deregistration-handler: "{{cfg.deregistration-handler}}"
 keepalive-timeout: {{cfg.keepalive-timeout}}
 keepalive-interval: {{cfg.keepalive-interval}}
-custom-attributes: "{{cfg.custom-attributes}}"
+extended-attributes: "{{cfg.custom-attributes}}"
 log-level: "{{cfg.log-level}}"
 redact: "{{cfg.redact}}"

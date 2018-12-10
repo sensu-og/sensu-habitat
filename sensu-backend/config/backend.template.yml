@@ -61,6 +61,7 @@ etcd-initial-cluster: ""
 etcd-initial-cluster-state: new
 etcd-name: {{sys.ip}}
 {{/if ~}}
+{{#if svc.me.follower ~}}
 etcd-listen-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
 etcd-advertise-client-urls: http://{{sys.ip}}:{{cfg.etcd_client_port}}
 etcd-listen-peer-urls: http://{{sys.ip}}:{{cfg.etcd_peer_port}}

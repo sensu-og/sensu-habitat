@@ -29,7 +29,7 @@ socket-port = 3030
 ##
 # statsd configuration
 ##
-statsd-disable = false
+statsd-disable = true
 statsd-event-handlers = ""
 statsd-flush-interval = 10
 statsd-metrics-host = "127.0.0.1"

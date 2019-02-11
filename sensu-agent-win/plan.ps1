@@ -1,17 +1,17 @@
 $pkg_name="sensu-agent-win"
 $pkg_filename="sensu-agent"
 $pkg_origin="ncr_devops_platform"
-$pkg_version="2.0.0-beta.4-1"
-$pkg_maintainer="NCR Devops Platform Team <johnwilliam.kerry@ncr.com>"
+$pkg_version="5.2.0"
+$pkg_maintainer="Sensu, Inc. <https://github.com/sensu/sensu-habitat/issues>"
 $pkg_license=("MIT")
-$pkg_source="https://storage.googleapis.com/sensu-binaries/$pkg_version/windows/amd64/$pkg_filename"
+$pkg_source="http://sensu-ci-builds.s3.amazonaws.com/master/20190206-1403/goreleaser/sensu-enterprise-go_${pkg_version}_windows_amd64.tar.gz"
 $pkg_svc_run="sensu-agent.exe start -c $pkg_svc_config_path/agent.yml"
-$pkg_shasum="0badb2a5776054419185ceede42f36adbc2a82a9639366f23f1a5f40819b6c12"
+$pkg_shasum="4de716eedb1cbd84163784e7e3165ae67442931510b67a93e7065247236cfc1d"
 $pkg_bin_dirs=@("bin")
 $pkg_binds_optional=@{
   backend="port"
 }
-$pkg_description="Sensu 2.0 Agent"
+$pkg_description="Sensu, Inc. 2.0 Agent"
 $pkg_upstream_url="https://sensu.io"
 
 function Invoke-Unpack {

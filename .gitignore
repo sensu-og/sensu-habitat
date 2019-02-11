@@ -3,3 +3,4 @@ results/
 .kitchen.yml
 Jenkinsfile
 tmp
+.DS_Store
